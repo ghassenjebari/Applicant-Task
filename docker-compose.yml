@@ -1,0 +1,56 @@
+version: "3"
+
+services:
+    database:
+        build: ./database
+        hostname: postgres
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: password
+            POSTGRES_DB: applicant-task
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+        networks:
+            - applicant-task
+        restart: unless-stopped
+
+    frontend:
+        build: ./frontend
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./frontend:/usr/src/app
+            - frontend_node_modules:/usr/src/app/node_modules
+            - frontend_next:/usr/src/app/.next
+        command: yarn dev
+    backend:
+        build: ./backend
+        ports:
+            - "5001:5000"
+        depends_on:
+            - database
+        networks:
+            - applicant-task
+        volumes:
+            - ./backend:/usr/src/app
+            - ./filestore:/usr/src/filestore
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: password
+            POSTGRES_HOST: database
+            POSTGRES_PORT: 5432
+            POSTGRES_DB: applicant-task
+            ENV_MODE: DEV
+        command: uvicorn app.app.main:app --proxy-headers --reload --host 0.0.0.0 --port 5000
+
+networks:
+    applicant-task:
+        driver: bridge
+
+volumes:
+    postgres-data:
+    filestore:
+    frontend_node_modules:
+    frontend_next:
