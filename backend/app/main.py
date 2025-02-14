@@ -69,13 +69,16 @@ def add_mock_data():
 
     # Add some mock parts
     crud.Part.create(db, schemas.PartCreate(
-        name='Engine'
+        name='Engine',
+        comment="Main engine for propulsion" 
     ), admin)
     crud.Part.create(db, schemas.PartCreate(
-        name='Tank'
+        name='Tank',
+        comment="Fuel tank" 
     ), admin)
     crud.Part.create(db, schemas.PartCreate(
-        name='Fairing'
+        name='Fairing',
+        comment="Payload fairing" 
     ), admin)
 
     return

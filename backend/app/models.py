@@ -26,7 +26,8 @@ class User(Base):
 class Part(Base):
     __tablename__ = 'Part'
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    name: Mapped[str] = mapped_column(String(), nullable=False, unique=True)
+    name: Mapped[str] = mapped_column(String(), nullable=False, unique=True,)
+    comment: Mapped[str] = mapped_column(String(), nullable=False,server_default='test')  # Comment field added
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True),
                                                  server_default=func.now(), nullable=False)
     created_by: Mapped[User] = relationship(User)

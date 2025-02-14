@@ -33,6 +33,7 @@ class UserUpdate(BaseModel):
 class Part(BaseModel):
     id: int
     name: str
+    comment: str #Comment section
     created_at: datetime.datetime
     created_by: User
     model_config = ConfigDict(from_attributes=True)
@@ -40,11 +41,12 @@ class Part(BaseModel):
 
 class PartCreate(BaseModel):
     name: str
+    comment: str #Comment section
 
 
 class PartUpdate(BaseModel):
     name: Optional[str] = None
-
+    comment: str #Comment section
 
 """ History """
 
