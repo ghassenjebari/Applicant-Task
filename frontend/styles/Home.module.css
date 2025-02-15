@@ -227,3 +227,19 @@
     transform: rotate(0deg);
   }
 }
+
+.main-content {
+  background: url('/Rocket.jpg') center/cover no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  padding: 2rem;
+  
+  display: flex;
+  flex-direction: column; 
+  align-items: stretch; 
+  justify-content: flex-start; 
+  width: calc(100% - 240px); 
+
+
+    
+}

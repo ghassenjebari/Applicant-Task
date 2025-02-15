@@ -9,15 +9,11 @@ const Users: NextPage = () => {
 
     return (
         <>
-            <Title>
-                This is the Parts page
-            </Title>
+            
             <Stack h="100%" w="100%" align="center">
                 <UserList />
                 <Link href='/' >
-                    <Button>
-                        Back
-                    </Button>
+                    
                 </Link>
             </Stack>
         </>

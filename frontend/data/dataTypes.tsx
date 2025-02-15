@@ -1,4 +1,4 @@
-interface User {
+ interface User {
     id: number,
     name: string,
     role: string,
@@ -7,9 +7,10 @@ interface User {
     is_active: boolean
 }
 
-interface Part {
+ interface Part {
     id: number,
     name: string,
+    comment:string,
     created_at: Date,
     created_by: User,
 }

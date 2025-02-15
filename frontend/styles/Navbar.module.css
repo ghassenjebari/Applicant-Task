@@ -1,0 +1,128 @@
+.navbar {
+  position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh; 
+    width: 220px;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    transition: transform 0.3s ease-in-out;
+
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+
+
+    background-image: url('/RFA.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1000;
+
+}
+
+
+.logo {
+  margin-bottom: 2rem;
+}
+
+.logo img {
+  width: 60px;
+  height: auto;
+}
+
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  align-items: center;
+  padding: 0;
+}
+
+.navLinks li {
+  width: 100%;
+  text-align: center;
+}
+
+.navLinks li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  width: 90%;
+  padding: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  transition: all 0.3s ease-in-out;
+}
+
+
+.navLinks li a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.navLinks li a i {
+  margin-right: 8px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.navLinks li a:hover i {
+  transform: rotate(10deg);
+}
+
+.active a {
+  font-weight: bold;
+  color: #ffeb3b;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+}
+
+
+.main-content {
+  margin-left: 240px;
+  padding: 2rem;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    width: 180px;
+    transform: translateX(-200px);
+    padding: 1rem 0.5rem;
+  }
+
+  .navbar.active {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .menu-button {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+
+  .menu-button:hover {
+    background: rgba(255, 255, 255, 0.4);
+  }
+}

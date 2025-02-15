@@ -27,6 +27,7 @@ app.add_middleware(
 )
 
 
+
 # get root logger
 # the __name__ resolve to "main" since we are at the root of the project.
 logging.basicConfig(level=logging.ERROR)
@@ -80,6 +81,76 @@ def add_mock_data():
         name='Fairing',
         comment="Payload fairing" 
     ), admin)
+    crud.Part.create(db, schemas.PartCreate(
+    name='Booster',
+    comment="Solid rocket booster for additional thrust"
+), admin)
+
+    crud.Part.create(db, schemas.PartCreate(
+    name='Avionics',
+    comment="Flight control and navigation systems"
+    ), admin)
+
+    crud.Part.create(db, schemas.PartCreate(
+    name='Payload Bay',
+    comment="Compartment for carrying satellites or cargo"
+    ), admin)
+
+    crud.Part.create(db, schemas.PartCreate(
+    name='Interstage',
+    comment="Connects rocket stages and allows for separation"
+    ), admin)
+
+    crud.Part.create(db, schemas.PartCreate(
+    name='Thrust Vector Control',
+    comment="System for controlling engine direction"
+    ), admin)
+
+    crud.Part.create(db, schemas.PartCreate(
+    name='Heat Shield',
+    comment="Protects from atmospheric re-entry heat"
+    ), admin)
+
+    crud.Part.create(db, schemas.PartCreate(
+    name='Grid Fins',
+    comment="Used for aerodynamic control during descent"
+    ), admin)
+
+    crud.Part.create(db, schemas.PartCreate(
+    name='Reaction Control System',
+    comment="Thrusters for fine attitude control"
+    ), admin)
+
+    crud.Part.create(db, schemas.PartCreate(
+    name='LOX Tank',
+    comment="Liquid oxygen tank for combustion"
+    ), admin)
+
+    crud.Part.create(db, schemas.PartCreate(
+    name='Fuel Lines',
+    comment="Transfers fuel from tanks to engines"
+    ), admin)
+
+    crud.Part.create(db, schemas.PartCreate(
+    name='Landing Legs',
+    comment="Deployable legs for soft landings"
+    ), admin)
+
+    crud.Part.create(db, schemas.PartCreate(
+    name='Escape Tower',
+    comment="Emergency crew escape system"
+    ), admin)
+
+    crud.Part.create(db, schemas.PartCreate(
+    name='Oxidizer Tank',
+    comment="Stores oxidizer needed for combustion"
+    ), admin)
+
+    crud.Part.create(db, schemas.PartCreate(
+    name='Telemetry System',
+    comment="Transmits flight data to ground stations"
+    ), admin)
+
 
     return
 

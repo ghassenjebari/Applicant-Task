@@ -1,30 +1,32 @@
-import { Button, Center, Title } from "@mantine/core"
-import { NextPage } from "next"
-import Link from "next/link"
+import { Button, Center, Title, Text, Stack } from "@mantine/core";
+import { NextPage } from "next";
+import Link from "next/link";
+import Head from "next/head";
 
 const Home: NextPage = () => {
   return (
     <>
-      <Title>
-        This is the Home page
-      </Title>
+      <Head>
+        <title>RFA TECHNICAL TEST</title>
+      </Head>
 
-      <Center p={10}>
-        <Link href='/users'>
-          <Button>
-            Move to Users page
-          </Button>
-        </Link>
-      </Center>
+      <div className="main-content">
+        <Stack align="center" spacing="md">
 
-      <Center p={10}>
-        <Link href='/parts'>
-          <Button>
-            Move to Parts page
-          </Button>
-        </Link>
-      </Center>
+          <Title order={1} className="hero-title">
+            RFA🚀
+          </Title>
+
+          <Text className="hero-subtitle">
+          Welcome to the internal dashboard
+          </Text>
+          <Link href="/parts">
+           
+          </Link>
+        </Stack>
+      </div>
     </>
-  )
-}
-export default Home
+  );
+};
+
+export default Home;
