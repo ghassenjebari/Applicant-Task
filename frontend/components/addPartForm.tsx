@@ -53,16 +53,13 @@ const AddPartForm: React.FC<AddPartFormProps> = ({ onPartAdded }) => {
     value={comment} 
     className="glass-inputModal"
     style={{ marginBottom: "20px" }}
-    onChange={(e) => setComment(e.target.value)}
-
-/>
+    onChange={(e) => setComment(e.target.value)} />
       
-           <Button
-                        className="add-button glass-button"
-                        type="submit" loading={loading}
-                    >
-                         Add Part
-          </Button>
+           <Button  className="add-button glass-button" type="submit" loading={loading}  > Add
+           </Button>
+                        
+                         
+                           
 
     </form>
   );

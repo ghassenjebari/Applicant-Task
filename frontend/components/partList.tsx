@@ -2,7 +2,7 @@ import { getParts } from "@/data/dataHandler";
 import { useEffect, useState } from "react";
 import { Modal, Button, Loader, Stack, Title, Text, TextInput, Group, Paper } from "@mantine/core";
 import AddPartForm from "@/components/addPartForm";
-import ModifyPartForm from "@/components/modifyPartForm"; 
+import ModifyPartForm from "@/components/modifyPartForm";
 import ItemCard from "@/components/ItemCard";
 
 
@@ -22,10 +22,10 @@ const PartList = () => {
 
     useEffect(() => {
         const fetchParts = async () => {
-            setLoading(true); 
+            setLoading(true);
             try {
-                const partsData = await getParts(); 
-                setParts(partsData); 
+                const partsData = await getParts();
+                setParts(partsData);
                 setFilteredParts(partsData);
             } catch (error) {
                 console.error("Error fetching parts:", error);
@@ -35,23 +35,23 @@ const PartList = () => {
             }
         };
         fetchParts();
-    }, []); 
-    
+    }, []);
+
     useEffect(() => {
         const filtered = parts.filter(part =>
             part.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            part.comment.toLowerCase().includes(searchTerm.toLowerCase()) 
+            part.comment.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredParts(filtered);
     }, [searchTerm, parts])
      ;
 
 
-     const handleModifyPart = (id: number) => {
+    const handleModifyPart = (id: number) => {
         setSelectedPartId(id);
         setOpenedModifyModal(true);
     };
-    
+
 
     return (
 
@@ -75,54 +75,90 @@ const PartList = () => {
                 </Button>
             </div>
 
-                <Modal
-                    opened={opened}
-                    onClose={() => setOpened(false)}
-                    centered
-                    withCloseButton={false}
-                    padding="lg"
-                    classNames={{ content: "glass-modal" }}
+            <Modal
+                opened={opened}
+                onClose={() => setOpened(false)}
+                centered
+                withCloseButton={false}
+                padding="lg"
+                classNames={{ content: "glass-modal" }} 
                 >
-                    <Title order={3} align="center" className="modal-title">
-                        Add a New Part
-                    </Title>
+                <Title order={3} align="center" className="modal-title">
+                    Add a New Part
+                </Title>
 
-                    <AddPartForm onPartAdded={() => {
-                        setLoading(true);
-                        getParts().then((partsData) => {
-                            setParts(partsData);
-                            setFilteredParts(partsData);
-                            setLoading(false);
-                            setOpened(false);         
-                        });
-                    }} />
+                <AddPartForm onPartAdded={() => {
+                    setLoading(true);
+                    getParts().then((partsData) => {
+                        setParts(partsData);
+                        setFilteredParts(partsData);
+                        setLoading(false);
+                        setOpened(false);
+                    });
+                }} />
+            </Modal>
 
+            <Modal
+              centered  
+
+
+              withCloseButton={false} 
+
+                opened={openedModifyModal}
+                onClose={() => { setOpenedModifyModal(false); setSelectedPartId(null); }}
+   
+  classNames={{ content: "glass-modal" }} 
+  styles={{ content: { maxWidth: "400px" } }}  
+
+
+            >
+                <Title order={3} align="center" className="modal-title">
+  Modify Part
+</Title>
+                {selectedPartId && (
                     
-                </Modal>
+                    <ModifyPartForm
+                        partId={selectedPartId}
+                        onPartUpdated={() => {
+                            setLoading(true);
+                            getParts().then((partsData) => {
+                                setParts(partsData);
+                                setFilteredParts(partsData);
+                                setLoading(false);
+                                setOpenedModifyModal(false);
+                                setSelectedPartId(null);
+                                
+                            });
+                        }}
+                        onClose={() => { setOpenedModifyModal(false); setSelectedPartId(null); }}
+                    />
+                )}
+            </Modal>
                
                 
 
-                {loading ? (
-                    <Loader color="blue" size="lg" />
-                ) : filteredParts.length === 0 ? (
-                    <Text color="dimmed" size="md">No part found.</Text>
-                ) : (
-                    <div className="part-grid">
-                        {filteredParts.map((part) => (
-                           <ItemCard
-                           key={part.id}
-                           id={part.id}
-                           name={part.name}
-                           description={part.comment}
-                           createdBy={part.created_by.name}
-                           type="part"
-                       />
-                        ))}
-                    </div>
-                )}
+            {loading ? (
+                <Loader color="blue" size="lg" />
+            ) : filteredParts.length === 0 ? (
+                <Text color="dimmed" size="md">No part found.</Text>
+            ) : (
+                <div className="part-grid">
+                    {filteredParts.map((part) => (
+                        <ItemCard
+                            key={part.id}
+                            id={part.id}
+                            name={part.name}
+                            description={part.comment}
+                            createdBy={part.created_by.name}
+                            type="part"
+                            onEdit={handleModifyPart}
+                        />
+                    ))}
+                </div>
+            )}
             
-                         </div>
-                        );
+        </div>
+    );
 
                         
 

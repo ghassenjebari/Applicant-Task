@@ -6,11 +6,10 @@ interface ItemCardProps {
     description?: string; 
     createdBy?: string; 
     type: "user" | "part";
-
-    
+    onEdit: (id: number) => void; 
 }
 
-const ItemCard = ({ name, description, createdBy, type }: ItemCardProps) => {
+const ItemCard = ({ id, name, description, createdBy, type, onEdit }: ItemCardProps) => {
     return (
         <Card shadow="sm" padding="lg" radius="md" className="item-card">
             <Stack spacing="sm" align="center"> 
@@ -25,21 +24,21 @@ const ItemCard = ({ name, description, createdBy, type }: ItemCardProps) => {
                 )}
 
 
-            
-
-
-                {type === "part" && createdBy && (
+                 {type === "part" && createdBy && (
                     <Text size="xs" align="center" color="dimmed">
                         Created by: {createdBy}
                     </Text>
                 )}
 
                
-                
+                {type === "part" && (
 
-
-
-             
+                    <div className="edit-button-container">
+                    <Button color="blue" onClick={() => onEdit(id)} size="xs" className="glass-button">
+                        Edit
+                    </Button>
+                </div>  
+                )}
 
             </Stack>
         </Card>

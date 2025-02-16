@@ -13,9 +13,7 @@ const Parts: NextPage = () => {
             <Stack h="100%" w="100%" align="center">
                 <PartList />
                 <Link href='/' >
-                    <Button>
-                        Back
-                    </Button>
+                   
                 </Link>
             </Stack>
         </>

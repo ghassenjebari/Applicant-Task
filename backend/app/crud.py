@@ -128,6 +128,8 @@ class CRUDBase(Generic[ModelType, SchemaType, CreateSchemaType, UpdateSchemaType
                         cls._model.__name__, res[0], res[1])
                 )
         db.refresh(obj_db)
+        serializable_obj = schemas.Part.model_validate(obj_db)
+
 
         # Create history entry
         History.create(db, schemas.HistoryCreate(
@@ -135,10 +137,10 @@ class CRUDBase(Generic[ModelType, SchemaType, CreateSchemaType, UpdateSchemaType
             userID=user.id,
             action='update',
             input={
-                'obj_db': obj_db,
-                'obj_in': obj_in
+                'obj_db': jsonable_encoder(serializable_obj),
+                'obj_in': obj_in.dict(exclude_unset=True)
             },
-            output=jsonable_encoder(obj_db)
+            output=jsonable_encoder(serializable_obj)
         ))
 
         return obj_db
