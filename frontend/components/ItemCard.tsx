@@ -6,7 +6,7 @@ interface ItemCardProps {
     description?: string; 
     createdBy?: string; 
     type: "user" | "part";
-    onEdit: (id: number) => void; 
+    onEdit?: (id: number) => void; 
 }
 
 const ItemCard = ({ id, name, description, createdBy, type, onEdit }: ItemCardProps) => {
@@ -34,7 +34,7 @@ const ItemCard = ({ id, name, description, createdBy, type, onEdit }: ItemCardPr
                 {type === "part" && (
 
                     <div className="edit-button-container">
-                    <Button color="blue" onClick={() => onEdit(id)} size="xs" className="glass-button">
+                    <Button color="blue" onClick={() => onEdit?.(id)} size="xs" className="glass-button">
                         Edit
                     </Button>
                 </div>  
